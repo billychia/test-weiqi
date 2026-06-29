@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weiqi Tutorial - Chapter 1: Introduction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f0e8;
+            color: #2c2c2c;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fffcf7;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 30px 40px 50px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: #3d2b1f;
+            border-bottom: 3px solid #d4a373;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h1 small {
+            font-size: 0.5em;
+            font-weight: 400;
+            color: #7a5a44;
+            margin-left: auto;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #5a3d2b;
+            margin: 30px 0 15px 0;
+            padding-left: 12px;
+            border-left: 5px solid #d4a373;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            color: #6b4c34;
+            margin: 20px 0 10px 0;
+        }
+
+        p, li {
+            line-height: 1.7;
+            font-size: 1.05em;
+            color: #3d3229;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin: 12px 0;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 2px solid #e8ddd0;
+        }
+
+        .nav-buttons button {
+            background: #8b6b4f;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-buttons button:hover {
+            background: #6d4f37;
+            transform: scale(1.02);
+        }
+
+        .nav-buttons button:disabled {
+            background: #c4b5a8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .nav-buttons .btn-secondary {
+            background: #b8a08e;
+        }
+
+        .nav-buttons .btn-secondary:hover {
+            background: #9c8472;
+        }
+
+        /* Board container */
+        .board-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+            background: #f0ebe3;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .board-wrapper canvas {
+            background: #deb887;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .board-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .board-controls button {
+            background: #5a3d2b;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .board-controls button:hover {
+            background: #3d2b1f;
+        }
+
+        .board-controls button.active {
+            background: #d4a373;
+            box-shadow: 0 0 0 2px #5a3d2b;
+        }
+
+        .status-msg {
+            margin-top: 12px;
+            font-weight: 600;
+            color: #5a3d2b;
+            min-height: 28px;
+            text-align: center;
+        }
+
+        /* Equipment cards */
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .equip-card {
+            background: #f5efe8;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .equip-card .emoji-big {
+            font-size: 4em;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .equip-card h4 {
+            color: #4d3222;
+            margin-bottom: 4px;
+        }
+
+        .equip-card p {
+            font-size: 0.9em;
+            color: #6b5a4a;
+        }
+
+        /* Territory example */
+        .territory-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .territory-item {
+            background: #f5efe8;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .territory-item .count {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #3d2b1f;
+        }
+
+        .highlight-box {
+            background: #faf3ea;
+            border-left: 5px solid #d4a373;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .grid-5x5 {
+            display: grid;
+            grid-template-columns: repeat(5, 40px);
+            grid-template-rows: repeat(5, 40px);
+            gap: 2px;
+            background: #deb887;
+            padding: 6px;
+            border-radius: 6px;
+            margin: 10px auto;
+            width: fit-content;
+        }
+
+        .grid-5x5 .cell {
+            background: #f5ede4;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .grid-5x5 .cell.black {
+            background: #2c2c2c;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin: 4px;
+        }
+
+        .grid-5x5 .cell.white {
+            background: #f0f0f0;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin: 4px;
+            box-shadow: inset -2px -2px 6px rgba(0,0,0,0.1);
+        }
+
+        .grid-5x5 .cell.empty {
+            background: #f5ede4;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .container {
+                padding: 16px;
+            }
+            h1 {
+                font-size: 1.6em;
+                flex-wrap: wrap;
+            }
+            .board-wrapper canvas {
+                width: 100%;
+                height: auto;
+            }
+            .nav-buttons {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .nav-buttons button {
+                flex: 1;
+                min-width: 100px;
+                padding: 10px 16px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* Progress indicator */
+        .progress {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .progress .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd2c6;
+            transition: 0.3s;
+        }
+
+        .progress .dot.done {
+            background: #8b6b4f;
+        }
+
+        .progress .dot.active {
+            background: #d4a373;
+            box-shadow: 0 0 0 3px #f5ede4, 0 0 0 5px #d4a373;
+        }
+
+        .lesson-tag {
+            display: inline-block;
+            background: #d4a373;
+            color: white;
+            font-size: 0.7em;
+            font-weight: 700;
+            padding: 2px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .etiquette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 12px 0;
+        }
+
+        .etiquette-card {
+            background: #f5efe8;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-bottom: 3px solid #d4a373;
+        }
+
+        .etiquette-card .emoji {
+            font-size: 1.8em;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>
+            ⚫ Weiqi Tutorial
+            <small>Chapter 1: Introduction</small>
+        </h1>
+
+        <!-- Progress dots -->
+        <div class="progress" id="progressDots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+            <span class="dot" data-index="5"></span>
+        </div>
+
+        <!-- ==================== SECTION 1.1 ==================== -->
+        <div class="section active" data-section="0">
+            <span class="lesson-tag">1.1</span>
+            <h2>📜 History of Weiqi (围棋)</h2>
+
+            <p><strong>Origin:</strong> Weiqi (called "Go" in the West) originated in China over <strong>4,000 years ago</strong>, making it one of the oldest board games still played today. Legend credits the mythical Emperor Yao (尧) with creating the game to educate his son.</p>
+
+            <p><strong>In Ancient China:</strong> Weiqi was a pastime of scholars, nobles, and military strategists. It was considered an essential skill for the educated elite. The game was played on a 17x17 board until the 19x19 standard emerged during the Tang Dynasty (618–907 AD).</p>
+
+            <div class="highlight-box">
+                <strong>🏯 The Four Arts of China (四艺):</strong>
+                <p style="margin-top:6px;">Weiqi was one of the <strong>Four Arts</strong> that every gentleman scholar was expected to master:</p>
+                <ul>
+                    <li><strong>琴 (Qín)</strong> — Music (guqin playing)</li>
+                    <li><strong>棋 (Qí)</strong> — Board game (Weiqi)</li>
+                    <li><strong>书 (Shū)</strong> — Calligraphy</li>
+                    <li><strong>画 (Huà)</strong> — Painting</li>
+                </ul>
+                <p style="margin-top:6px;font-size:0.95em;color:#5a4a3a;">These arts represented the ideal of a well-rounded, cultured individual.</p>
+            </div>
+
+            <p><strong>Spread to Japan &amp; Korea:</strong> Weiqi reached Japan in the 7th century, where it became known as <strong>Go</strong> (碁). It flourished under the patronage of shoguns and samurai. The Japanese established professional houses and refined the game's theory. In Korea, it is called <strong>Baduk</strong> (바둑) and became deeply embedded in Korean culture, with many top modern players hailing from Korea.</p>
+
+            <p><strong>South East Asia:</strong> Weiqi spread through trade routes, with smaller but dedicated communities in Vietnam, Thailand, Singapore, and Malaysia. It remains a niche but growing activity.</p>
+
+            <p><strong>The West &amp; Africa:</strong> Go arrived in Europe in the 19th century via Japanese diplomats. Today, Europe has a strong Go scene with national federations, tournaments, and even professional players. In the USA, the American Go Association (AGA) promotes the game. Africa has small but passionate communities, particularly in South Africa and Nigeria, with growth supported by online platforms.</p>
+
+            <p><strong>Modern Era:</strong> The 21st century has seen a revolution — AI systems like <strong>AlphaGo</strong> (2016) defeated top human players, sparking global interest and changing how the game is studied and played.</p>
+        </div>
+
+        <!-- ==================== SECTION 1.2 ==================== -->
+        <div class="section" data-section="1">
+            <span class="lesson-tag">1.2</span>
+            <h2>🎒 Equipment Needed</h2>
+
+            <p>To play Weiqi, you need only a few items:</p>
+
+            <div class="equipment-grid">
+                <div class="equip-card">
+                    <span class="emoji-big">⬛</span>
+                    <h4>Board</h4>
+                    <p><strong>9×9</strong> — Beginner<br>
+                       <strong>13×13</strong> — Intermediate<br>
+                       <strong>19×19</strong> — Standard (traditional)</p>
+                    <p style="font-size:0.85em;color:#7a6a5a;">The board has a grid of lines; stones are placed on <em>intersections</em>.</p>
+                </div>
+                <div class="equip-card">
+                    <span class="emoji-big">⚫⚪</span>
+                    <h4>Stones</h4>
+                    <p><strong>181 Black</strong> · <strong>180 White</strong></p>
+                    <p style="font-size:0.85em;color:#7a6a5a;">Made from slate (black) and clamshell (white) traditionally, or plastic/glass for beginners.</p>
+                </div>
+                <div class="equip-card">
+                    <span class="emoji-big">🥣</span>
+                    <h4>Bowls</h4>
+                    <p>Wooden or plastic bowls to hold the stones during play.</p>
+                    <p style="font-size:0.85em;color:#7a6a5a;">Often made from bamboo, cherry, or other woods.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>💻 Playing in the Digital World:</strong>
+                <p>Today, most beginners learn and play online. Popular platforms include:</p>
+                <ul>
+                    <li><strong>OGS (Online Go Server)</strong> — Web-based, beginner-friendly</li>
+                    <li><strong>Pandanet</strong> — One of the oldest Go servers</li>
+                    <li><strong>Fox Weiqi / Tygem</strong> — Huge Asian servers</li>
+                    <li><strong>AI Bots:</strong> KataGo, Leela Zero, and even built-in bots on apps like <strong>BadukPop</strong></li>
+                </ul>
+                <p style="margin-top:6px;">You can play against humans or AI from your phone, tablet, or computer — no physical equipment needed!</p>
+            </div>
+
+            <p style="font-size:0.95em;color:#6b5a4a;">👇 <em>In the interactive board below, you can switch board sizes to see the difference.</em></p>
+        </div>
+
+        <!-- ==================== SECTION 1.3 ==================== -->
+        <div class="section" data-section="2">
+            <span class="lesson-tag">1.3</span>
+            <h2>🎯 Objective: Enclose More Territory</h2>
+
+            <p><strong>The goal of Weiqi</strong> is to <strong>control more territory</strong> than your opponent. Territory is the empty intersections surrounded by your stones.</p>
+
+            <div class="highlight-box">
+                <strong>♟️ Contrast with Chess:</strong>
+                <p>In <strong>Chinese Chess (象棋)</strong> and <strong>International Chess</strong>, the objective is to <em>capture the King</em> (or General) — a destructive goal. In Weiqi, the goal is <strong>constructive</strong>: you build and surround territory, not eliminate the opponent's leader.</p>
+                <p style="margin-top:6px;font-style:italic;">"Weiqi is a game of balance and influence, not annihilation."</p>
+            </div>
+
+            <h3>Example: 5×5 Endgame</h3>
+            <p>Let's look at a finished game on a tiny 5×5 board. Black stones are ⚫, White are ⚪. Empty intersections are territory.</p>
+
+            <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:15px 0;">
+                <div style="background:#f5efe8;padding:15px;border-radius:12px;text-align:center;">
+                    <div class="grid-5x5">
+                        <!-- Row 0 -->
+                        <div class="cell black"></div><div class="cell black"></div><div class="cell black"></div><div class="cell black"></div><div class="cell black"></div>
+                        <!-- Row 1 -->
+                        <div class="cell black"></div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell black"></div>
+                        <!-- Row 2 -->
+                        <div class="cell black"></div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell white"></div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell white"></div>
+                        <!-- Row 3 -->
+                        <div class="cell black"></div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell white"></div>
+                        <!-- Row 4 -->
+                        <div class="cell black"></div><div class="cell white"></div><div class="cell white"></div><div class="cell white"></div><div class="cell white"></div>
+                    </div>
+                    <p style="margin-top:6px;font-weight:600;">5×5 Example Board</p>
+                </div>
+
+                <div style="background:#f5efe8;padding:15px 25px;border-radius:12px;display:flex;flex-direction:column;justify-content:center;">
+                    <div class="territory-item">
+                        <span style="font-size:1.8em;">⚫</span> Black territory: <span class="count">6</span>
+                        <span style="display:block;font-size:0.8em;color:#6b5a4a;">(empty intersections surrounded by black)</span>
+                    </div>
+                    <div class="territory-item" style="margin-top:6px;">
+                        <span style="font-size:1.8em;">⚪</span> White territory: <span class="count">4</span>
+                        <span style="display:block;font-size:0.8em;color:#6b5a4a;">(empty intersections surrounded by white)</span>
+                    </div>
+                    <div style="margin-top:10px;font-size:1.3em;font-weight:700;color:#3d2b1f;">
+                        🏆 Black wins by 2 points!
+                    </div>
+                </div>
+            </div>
+
+            <p><strong>Note:</strong> In real games, we also count captured stones and <em>komi</em> (compensation points for white playing second), but this gives you the basic idea.</p>
+        </div>
+
+        <!-- ==================== SECTION 1.4 (all sub-sections) ==================== -->
+        <div class="section" data-section="3">
+            <span class="lesson-tag">1.4</span>
+            <h2>📏 Basic Rules</h2>
+
+            <!-- 1.4.1 -->
+            <h3>1.4.1 — Two Players, Black Moves First</h3>
+            <p>Black places a stone on any empty intersection, then White, then Black, and so on until both players pass.</p>
+
+            <!-- Interactive Board -->
+            <div class="board-wrapper">
+                <canvas id="goBoard" width="400" height="400"></canvas>
+                <div class="board-controls">
+                    <button data-size="9" class="active">9×9</button>
+                    <button data-size="13">13×13</button>
+                    <button data-size="19">19×19</button>
+                    <button id="resetBoardBtn">🔄 Reset</button>
+                </div>
+                <div class="status-msg" id="boardStatus">⚫ Black's turn — click to place a stone</div>
+            </div>
+
+            <p style="font-size:0.95em;color:#6b5a4a;">⬆️ Try placing stones! Click on intersections. Black moves first, then White alternates.</p>
+
+            <!-- 1.4.2 -->
+            <h3 style="margin-top:25px;">1.4.2 — Stones on Empty Intersections, No Moving</h3>
+            <p>Stones are placed on <strong>intersections</strong> of the grid lines (not in the squares). Once placed, a stone <strong>cannot be moved</strong> — it stays until captured (if ever).</p>
+            <p style="font-size:0.95em;color:#6b5a4a;">✅ Try it above — you can only place on empty intersections.</p>
+
+            <!-- 1.4.3 -->
+            <h3>1.4.3 — Liberties &amp; Capturing</h3>
+            <p>A <strong>liberty</strong> is an empty intersection directly adjacent (up, down, left, right) to a stone. A stone with no liberties is <strong>captured</strong> and removed.</p>
+
+            <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:12px 0;">
+                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
+                    <div style="font-size:2.2em;">📍 <span style="background:#2c2c2c;display:inline-block;width:28px;height:28px;border-radius:50%;"></span></div>
+                    <p><strong>Corner:</strong> 2 liberties</p>
+                </div>
+                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
+                    <div style="font-size:2.2em;">📍 <span style="background:#2c2c2c;display:inline-block;width:28px;height:28px;border-radius:50%;"></span> <span style="font-size:0.5em;">⬆️⬇️⬅️➡️</span></div>
+                    <p><strong>Side:</strong> 3 liberties</p>
+                </div>
+                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
+                    <div style="font-size:2.2em;">📍 <span style="background:#2c2c2c;display:inline-block;width:28px;height:28px;border-radius:50%;"></span> <span style="font-size:0.5em;">⬆️⬇️⬅️➡️</span></div>
+                    <p><strong>Middle:</strong> 4 liberties</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>⚡ Capture Example:</strong>
+                <p>If White places a stone on all 4 liberties of a Black stone in the middle, that Black stone is captured and removed. Try it on the board above — surround a stone completely!</p>
+            </div>
+
+            <!-- 1.4.4 -->
+            <h3>1.4.4 — Connected Stones Share Liberties</h3>
+            <p>Stones of the same color that are adjacent (up/down/left/right) are <strong>connected</strong>. They share liberties and live or die together.</p>
+
+            <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:12px 0;">
+                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
+                    <div style="font-size:2.2em;">
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                    </div>
+                    <p><strong>2 stones</strong><br><span style="font-size:0.9em;color:#6b5a4a;">6 liberties (shared)</span></p>
+                </div>
+                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
+                    <div style="font-size:2.2em;">
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                    </div>
+                    <p><strong>3 stones (L-shape)</strong><br><span style="font-size:0.9em;color:#6b5a4a;">7 liberties</span></p>
+                </div>
+                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
+                    <div style="font-size:2.2em;">
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
+                    </div>
+                    <p><strong>4 stones (square)</strong><br><span style="font-size:0.9em;color:#6b5a4a;">8 liberties</span></p>
+                </div>
+            </div>
+
+            <p><strong>Challenge:</strong> On the board above, try placing two connected Black stones, then use White stones to surround and capture them. Count the liberties as you go!</p>
+        </div>
+
+        <!-- ==================== SECTION 1.5 ==================== -->
+        <div class="section" data-section="4">
+            <span class="lesson-tag">1.5</span>
+            <h2>🙏 Etiquette &amp; Manners</h2>
+
+            <p>Weiqi is a game of respect and mindfulness. Here are key etiquette points:</p>
+
+            <div class="etiquette-grid">
+                <div class="etiquette-card">
+                    <span class="emoji">🙇</span>
+                    <strong>Bow before starting</strong>
+                    <p style="font-size:0.9em;color:#5a4a3a;">Show respect to your opponent and the game.</p>
+                </div>
+                <div class="etiquette-card">
+                    <span class="emoji">🤫</span>
+                    <strong>Silence &amp; concentration</strong>
+                    <p style="font-size:0.9em;color:#5a4a3a;">Avoid distractions. Think before you move.</p>
+                </div>
+                <div class="etiquette-card">
+                    <span class="emoji">✋</span>
+                    <strong>Place stones gently</strong>
+                    <p style="font-size:0.9em;color:#5a4a3a;">Clicking stones loudly is considered impolite in traditional settings.</p>
+                </div>
+                <div class="etiquette-card">
+                    <span class="emoji">⏳</span>
+                    <strong>Don't stall</strong>
+                    <p style="font-size:0.9em;color:#5a4a3a;">Play at a reasonable pace. Respect your opponent's time.</p>
+                </div>
+                <div class="etiquette-card">
+                    <span class="emoji">🤝</span>
+                    <strong>Resign with dignity</strong>
+                    <p style="font-size:0.9em;color:#5a4a3a;">If you're losing, place two stones on the board to resign, then thank your opponent.</p>
+                </div>
+                <div class="etiquette-card">
+                    <span class="emoji">📖</span>
+                    <strong>Review together</strong>
+                    <p style="font-size:0.9em;color:#5a4a3a;">After the game, it's customary to review key moves with your opponent.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top:10px;">
+                <strong>🧘 The Spirit of Weiqi:</strong>
+                <p>"Win without arrogance, lose without resentment." The game is a mirror of your character — patience, humility, and clarity of mind are as important as tactical skill.</p>
+            </div>
+        </div>
+
+        <!-- ==================== NAVIGATION ==================== -->
+        <div class="nav-buttons">
+            <button id="prevBtn" class="btn-secondary" disabled>◀ Previous</button>
+            <span style="font-size:0.95em;color:#7a6a5a;align-self:center;" id="sectionCounter">1 / 5</span>
+            <button id="nextBtn">Next ▶</button>
+        </div>
+
+    </div>
+
+    <script>
+        // ============================================================
+        //  SECTION NAVIGATION
+        // ============================================================
+        const sections = document.querySelectorAll('.section');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const counter = document.getElementById('sectionCounter');
+        let current = 0;
+
+        function updateNav() {
+            sections.forEach((s, i) => s.classList.toggle('active', i === current));
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+                d.classList.toggle('done', i < current);
+            });
+            prevBtn.disabled = current === 0;
+            counter.textContent = `${current+1} / ${sections.length}`;
+            // Re-draw board when switching to section with board
+            if (current === 3) setTimeout(drawBoard, 100);
+        }
+
+        prevBtn.addEventListener('click', () => { if (current > 0) { current--; updateNav(); } });
+        nextBtn.addEventListener('click', () => { if (current < sections.length - 1) { current++; updateNav(); } });
+        dots.forEach((d, i) => d.addEventListener('click', () => { current = i; updateNav(); }));
+
+        // ============================================================
+        //  GO BOARD - FULL IMPLEMENTATION
+        // ============================================================
+        const canvas = document.getElementById('goBoard');
+        const ctx = canvas.getContext('2d');
+        const status = document.getElementById('boardStatus');
+
+        let boardSize = 9;
+        let gridSize = 9; // default
+        const cellSize = 38;
+        const padding = 25;
+        let board = [];
+        let currentPlayer = 'black'; // 'black' or 'white'
+        let gameOver = false;
+
+        function initBoard(size) {
+            gridSize = size;
+            board = Array(size).fill().map(() => Array(size).fill(null));
+            currentPlayer = 'black';
+            gameOver = false;
+            status.textContent = '⚫ Black\'s turn — click to place a stone';
+            drawBoard();
+        }
+
+        function getCanvasSize() {
+            return gridSize * cellSize + padding * 2;
+        }
+
+        function resizeCanvas() {
+            const size = getCanvasSize();
+            canvas.width = size;
+            canvas.height = size;
+            canvas.style.width = Math.min(size, 420) + 'px';
+            canvas.style.height = Math.min(size, 420) + 'px';
+        }
+
+        function drawBoard() {
+            resizeCanvas();
+            const size = canvas.width;
+            const pad = padding;
+            const cSize = (size - pad * 2) / gridSize;
+
+            // Wood background
+            ctx.fillStyle = '#deb887';
+            ctx.fillRect(0, 0, size, size);
+
+            // Grid lines
+            ctx.strokeStyle = '#3d2b1f';
+            ctx.lineWidth = 1;
+            for (let i = 0; i
