@@ -662,45 +662,83 @@
     </div>
 
     <script>
-        // ============================================================
-        //  SECTION NAVIGATION
-        // ============================================================
-        const sections = document.querySelectorAll('.section');
-        const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const counter = document.getElementById('sectionCounter');
-        let current = 0;
+    // ============================================================
+    //  SECTION NAVIGATION - CORRECTED
+    // ============================================================
+    const sections = document.querySelectorAll('.section');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counter = document.getElementById('sectionCounter');
+    let current = 0;
 
-        function updateNav() {
-            sections.forEach((s, i) => s.classList.toggle('active', i === current));
-            dots.forEach((d, i) => {
-                d.classList.toggle('active', i === current);
-                d.classList.toggle('done', i < current);
-            });
-            prevBtn.disabled = current === 0;
-            counter.textContent = `${current+1} / ${sections.length}`;
-            // Re-draw board when switching to section with board
-            if (current === 3) setTimeout(drawBoard, 100);
+    function updateNav() {
+        // Hide all sections, then show the current one
+        sections.forEach((s, i) => {
+            s.classList.toggle('active', i === current);
+        });
+
+        // Update progress dots
+        dots.forEach((d, i) => {
+            d.classList.toggle('active', i === current);
+            d.classList.toggle('done', i < current);
+        });
+
+        // Update button states and counter
+        prevBtn.disabled = current === 0;
+        nextBtn.textContent = current === sections.length - 1 ? '✅ Finish' : 'Next ▶';
+        counter.textContent = `${current+1} / ${sections.length}`;
+
+        // Re-draw the Go board if we're on that section
+        if (current === 3) {
+            // Make sure the board is initialized
+            if (typeof drawBoard === 'function') {
+                drawBoard();
+            }
         }
+    }
 
-        prevBtn.addEventListener('click', () => { if (current > 0) { current--; updateNav(); } });
-        nextBtn.addEventListener('click', () => { if (current < sections.length - 1) { current++; updateNav(); } });
-        dots.forEach((d, i) => d.addEventListener('click', () => { current = i; updateNav(); }));
+    // Event listeners for navigation buttons
+    prevBtn.addEventListener('click', () => {
+        if (current > 0) {
+            current--;
+            updateNav();
+        }
+    });
 
-        // ============================================================
-        //  GO BOARD - FULL IMPLEMENTATION
-        // ============================================================
-        const canvas = document.getElementById('goBoard');
+    nextBtn.addEventListener('click', () => {
+        if (current < sections.length - 1) {
+            current++;
+            updateNav();
+        } else {
+            alert('🎉 You have completed Chapter 1! Well done!');
+        }
+    });
+
+    // Click on progress dots to jump to a section
+    dots.forEach((d, i) => {
+        d.addEventListener('click', () => {
+            current = i;
+            updateNav();
+        });
+    });
+
+    // ============================================================
+    //  GO BOARD - SIMPLIFIED & RELIABLE (Add this if missing)
+    // ============================================================
+    // This is a basic version to ensure the board works.
+    // If you have a more complex version, you can replace this part.
+
+    const canvas = document.getElementById('goBoard');
+    if (canvas) {
         const ctx = canvas.getContext('2d');
         const status = document.getElementById('boardStatus');
 
         let boardSize = 9;
-        let gridSize = 9; // default
-        const cellSize = 38;
+        let gridSize = 9;
         const padding = 25;
         let board = [];
-        let currentPlayer = 'black'; // 'black' or 'white'
+        let currentPlayer = 'black';
         let gameOver = false;
 
         function initBoard(size) {
@@ -708,12 +746,12 @@
             board = Array(size).fill().map(() => Array(size).fill(null));
             currentPlayer = 'black';
             gameOver = false;
-            status.textContent = '⚫ Black\'s turn — click to place a stone';
+            if (status) status.textContent = '⚫ Black\'s turn — click to place a stone';
             drawBoard();
         }
 
         function getCanvasSize() {
-            return gridSize * cellSize + padding * 2;
+            return gridSize * 38 + padding * 2;
         }
 
         function resizeCanvas() {
@@ -737,4 +775,100 @@
             // Grid lines
             ctx.strokeStyle = '#3d2b1f';
             ctx.lineWidth = 1;
-            for (let i = 0; i
+            for (let i = 0; i < gridSize; i++) {
+                ctx.beginPath();
+                ctx.moveTo(pad, pad + i * cSize);
+                ctx.lineTo(size - pad, pad + i * cSize);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(pad + i * cSize, pad);
+                ctx.lineTo(pad + i * cSize, size - pad);
+                ctx.stroke();
+            }
+
+            // Draw stones
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    const stone = board[row][col];
+                    if (!stone) continue;
+                    const x = pad + col * cSize;
+                    const y = pad + row * cSize;
+                    const radius = cSize * 0.42;
+
+                    const gradient = ctx.createRadialGradient(
+                        x - radius * 0.3, y - radius * 0.3, radius * 0.1,
+                        x, y, radius
+                    );
+                    if (stone === 'black') {
+                        gradient.addColorStop(0, '#555');
+                        gradient.addColorStop(1, '#111');
+                    } else {
+                        gradient.addColorStop(0, '#fff');
+                        gradient.addColorStop(1, '#ccc');
+                    }
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                    ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                    ctx.shadowBlur = 6;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+        }
+
+        // Handle clicks on the board
+        canvas.addEventListener('click', (e) => {
+            if (gameOver) return;
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            const mouseX = (e.clientX - rect.left) * scaleX;
+            const mouseY = (e.clientY - rect.top) * scaleY;
+            const pad = padding;
+            const cSize = (canvas.width - pad * 2) / gridSize;
+
+            let col = Math.round((mouseX - pad) / cSize);
+            let row = Math.round((mouseY - pad) / cSize);
+
+            if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) return;
+            if (board[row][col] !== null) return;
+
+            board[row][col] = currentPlayer;
+            const next = currentPlayer === 'black' ? 'white' : 'black';
+            currentPlayer = next;
+            if (status) {
+                status.textContent = currentPlayer === 'black' ? '⚫ Black\'s turn' : '⚪ White\'s turn';
+            }
+            drawBoard();
+        });
+
+        // Board size buttons
+        document.querySelectorAll('.board-controls button[data-size]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.board-controls button[data-size]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const size = parseInt(btn.dataset.size);
+                initBoard(size);
+            });
+        });
+
+        // Reset button
+        const resetBtn = document.getElementById('resetBoardBtn');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                const activeSizeBtn = document.querySelector('.board-controls button[data-size].active');
+                const size = activeSizeBtn ? parseInt(activeSizeBtn.dataset.size) : 9;
+                initBoard(size);
+            });
+        }
+
+        // Initialize the board
+        initBoard(9);
+    }
+
+    // Initialize navigation on page load
+    updateNav();
+</script>
