@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weiqi Tutorial - Chapter 1: Introduction</title>
+    <title>Weiqi Tutorial - Learn Go</title>
     <style>
+        /* ===== ALL STYLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -59,13 +60,15 @@
             margin: 20px 0 10px 0;
         }
 
-        p, li {
+        p,
+        li {
             line-height: 1.7;
             font-size: 1.05em;
             color: #3d3229;
         }
 
-        ul, ol {
+        ul,
+        ol {
             padding-left: 25px;
             margin: 12px 0;
         }
@@ -133,7 +136,6 @@
             background: #9c8472;
         }
 
-        /* Board container */
         .board-wrapper {
             display: flex;
             flex-direction: column;
@@ -189,7 +191,6 @@
             text-align: center;
         }
 
-        /* Equipment cards */
         .equipment-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -202,7 +203,14 @@
             border-radius: 12px;
             padding: 15px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .equip-card img {
+            width: 100%;
+            max-width: 150px;
+            border-radius: 8px;
+            margin: 8px auto;
         }
 
         .equip-card .emoji-big {
@@ -221,7 +229,14 @@
             color: #6b5a4a;
         }
 
-        /* Territory example */
+        .highlight-box {
+            background: #faf3ea;
+            border-left: 5px solid #d4a373;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
         .territory-grid {
             display: flex;
             flex-wrap: wrap;
@@ -242,14 +257,6 @@
             font-size: 2.5em;
             font-weight: 700;
             color: #3d2b1f;
-        }
-
-        .highlight-box {
-            background: #faf3ea;
-            border-left: 5px solid #d4a373;
-            padding: 15px 20px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
         }
 
         .grid-5x5 {
@@ -288,14 +295,86 @@
             width: 32px;
             height: 32px;
             margin: 4px;
-            box-shadow: inset -2px -2px 6px rgba(0,0,0,0.1);
+            box-shadow: inset -2px -2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .grid-5x5 .cell.empty {
             background: #f5ede4;
         }
 
-        /* Responsive */
+        .etiquette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 12px 0;
+        }
+
+        .etiquette-card {
+            background: #f5efe8;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-bottom: 3px solid #d4a373;
+        }
+
+        .etiquette-card .emoji {
+            font-size: 1.8em;
+            margin-right: 8px;
+        }
+
+        .progress {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .progress .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd2c6;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .progress .dot.done {
+            background: #8b6b4f;
+        }
+
+        .progress .dot.active {
+            background: #d4a373;
+            box-shadow: 0 0 0 3px #f5ede4, 0 0 0 5px #d4a373;
+        }
+
+        .lesson-tag {
+            display: inline-block;
+            background: #d4a373;
+            color: white;
+            font-size: 0.7em;
+            font-weight: 700;
+            padding: 2px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .image-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container .caption {
+            font-size: 0.9em;
+            color: #6b5a4a;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
         @media (max-width: 700px) {
             .container {
                 padding: 16px;
@@ -319,61 +398,6 @@
                 font-size: 0.9em;
             }
         }
-
-        /* Progress indicator */
-        .progress {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .progress .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ddd2c6;
-            transition: 0.3s;
-        }
-
-        .progress .dot.done {
-            background: #8b6b4f;
-        }
-
-        .progress .dot.active {
-            background: #d4a373;
-            box-shadow: 0 0 0 3px #f5ede4, 0 0 0 5px #d4a373;
-        }
-
-        .lesson-tag {
-            display: inline-block;
-            background: #d4a373;
-            color: white;
-            font-size: 0.7em;
-            font-weight: 700;
-            padding: 2px 14px;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .etiquette-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 14px;
-            margin: 12px 0;
-        }
-
-        .etiquette-card {
-            background: #f5efe8;
-            padding: 14px 18px;
-            border-radius: 10px;
-            border-bottom: 3px solid #d4a373;
-        }
-
-        .etiquette-card .emoji {
-            font-size: 1.8em;
-            margin-right: 8px;
-        }
     </style>
 </head>
 <body>
@@ -385,490 +409,413 @@
         </h1>
 
         <!-- Progress dots -->
-        <div class="progress" id="progressDots">
-            <span class="dot active" data-index="0"></span>
-            <span class="dot" data-index="1"></span>
-            <span class="dot" data-index="2"></span>
-            <span class="dot" data-index="3"></span>
-            <span class="dot" data-index="4"></span>
-            <span class="dot" data-index="5"></span>
-        </div>
+        <div class="progress" id="progressDots"></div>
 
-        <!-- ==================== SECTION 1.1 ==================== -->
-        <div class="section active" data-section="0">
-            <span class="lesson-tag">1.1</span>
-            <h2>📜 History of Weiqi (围棋)</h2>
+        <!-- Content will be rendered here -->
+        <div id="contentContainer"></div>
 
-            <p><strong>Origin:</strong> Weiqi (called "Go" in the West) originated in China over <strong>4,000 years ago</strong>, making it one of the oldest board games still played today. Legend credits the mythical Emperor Yao (尧) with creating the game to educate his son.</p>
-
-            <p><strong>In Ancient China:</strong> Weiqi was a pastime of scholars, nobles, and military strategists. It was considered an essential skill for the educated elite. The game was played on a 17x17 board until the 19x19 standard emerged during the Tang Dynasty (618–907 AD).</p>
-
-            <div class="highlight-box">
-                <strong>🏯 The Four Arts of China (四艺):</strong>
-                <p style="margin-top:6px;">Weiqi was one of the <strong>Four Arts</strong> that every gentleman scholar was expected to master:</p>
-                <ul>
-                    <li><strong>琴 (Qín)</strong> — Music (guqin playing)</li>
-                    <li><strong>棋 (Qí)</strong> — Board game (Weiqi)</li>
-                    <li><strong>书 (Shū)</strong> — Calligraphy</li>
-                    <li><strong>画 (Huà)</strong> — Painting</li>
-                </ul>
-                <p style="margin-top:6px;font-size:0.95em;color:#5a4a3a;">These arts represented the ideal of a well-rounded, cultured individual.</p>
-            </div>
-
-            <p><strong>Spread to Japan &amp; Korea:</strong> Weiqi reached Japan in the 7th century, where it became known as <strong>Go</strong> (碁). It flourished under the patronage of shoguns and samurai. The Japanese established professional houses and refined the game's theory. In Korea, it is called <strong>Baduk</strong> (바둑) and became deeply embedded in Korean culture, with many top modern players hailing from Korea.</p>
-
-            <p><strong>South East Asia:</strong> Weiqi spread through trade routes, with smaller but dedicated communities in Vietnam, Thailand, Singapore, and Malaysia. It remains a niche but growing activity.</p>
-
-            <p><strong>The West &amp; Africa:</strong> Go arrived in Europe in the 19th century via Japanese diplomats. Today, Europe has a strong Go scene with national federations, tournaments, and even professional players. In the USA, the American Go Association (AGA) promotes the game. Africa has small but passionate communities, particularly in South Africa and Nigeria, with growth supported by online platforms.</p>
-
-            <p><strong>Modern Era:</strong> The 21st century has seen a revolution — AI systems like <strong>AlphaGo</strong> (2016) defeated top human players, sparking global interest and changing how the game is studied and played.</p>
-        </div>
-
-        <!-- ==================== SECTION 1.2 ==================== -->
-        <div class="section" data-section="1">
-            <span class="lesson-tag">1.2</span>
-            <h2>🎒 Equipment Needed</h2>
-
-            <p>To play Weiqi, you need only a few items:</p>
-
-            <div class="equipment-grid">
-                <div class="equip-card">
-                    <span class="emoji-big">⬛</span>
-                    <h4>Board</h4>
-                    <p><strong>9×9</strong> — Beginner<br>
-                       <strong>13×13</strong> — Intermediate<br>
-                       <strong>19×19</strong> — Standard (traditional)</p>
-                    <p style="font-size:0.85em;color:#7a6a5a;">The board has a grid of lines; stones are placed on <em>intersections</em>.</p>
-                </div>
-                <div class="equip-card">
-                    <span class="emoji-big">⚫⚪</span>
-                    <h4>Stones</h4>
-                    <p><strong>181 Black</strong> · <strong>180 White</strong></p>
-                    <p style="font-size:0.85em;color:#7a6a5a;">Made from slate (black) and clamshell (white) traditionally, or plastic/glass for beginners.</p>
-                </div>
-                <div class="equip-card">
-                    <span class="emoji-big">🥣</span>
-                    <h4>Bowls</h4>
-                    <p>Wooden or plastic bowls to hold the stones during play.</p>
-                    <p style="font-size:0.85em;color:#7a6a5a;">Often made from bamboo, cherry, or other woods.</p>
-                </div>
-            </div>
-
-            <div class="highlight-box">
-                <strong>💻 Playing in the Digital World:</strong>
-                <p>Today, most beginners learn and play online. Popular platforms include:</p>
-                <ul>
-                    <li><strong>OGS (Online Go Server)</strong> — Web-based, beginner-friendly</li>
-                    <li><strong>Pandanet</strong> — One of the oldest Go servers</li>
-                    <li><strong>Fox Weiqi / Tygem</strong> — Huge Asian servers</li>
-                    <li><strong>AI Bots:</strong> KataGo, Leela Zero, and even built-in bots on apps like <strong>BadukPop</strong></li>
-                </ul>
-                <p style="margin-top:6px;">You can play against humans or AI from your phone, tablet, or computer — no physical equipment needed!</p>
-            </div>
-
-            <p style="font-size:0.95em;color:#6b5a4a;">👇 <em>In the interactive board below, you can switch board sizes to see the difference.</em></p>
-        </div>
-
-        <!-- ==================== SECTION 1.3 ==================== -->
-        <div class="section" data-section="2">
-            <span class="lesson-tag">1.3</span>
-            <h2>🎯 Objective: Enclose More Territory</h2>
-
-            <p><strong>The goal of Weiqi</strong> is to <strong>control more territory</strong> than your opponent. Territory is the empty intersections surrounded by your stones.</p>
-
-            <div class="highlight-box">
-                <strong>♟️ Contrast with Chess:</strong>
-                <p>In <strong>Chinese Chess (象棋)</strong> and <strong>International Chess</strong>, the objective is to <em>capture the King</em> (or General) — a destructive goal. In Weiqi, the goal is <strong>constructive</strong>: you build and surround territory, not eliminate the opponent's leader.</p>
-                <p style="margin-top:6px;font-style:italic;">"Weiqi is a game of balance and influence, not annihilation."</p>
-            </div>
-
-            <h3>Example: 5×5 Endgame</h3>
-            <p>Let's look at a finished game on a tiny 5×5 board. Black stones are ⚫, White are ⚪. Empty intersections are territory.</p>
-
-            <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:15px 0;">
-                <div style="background:#f5efe8;padding:15px;border-radius:12px;text-align:center;">
-                    <div class="grid-5x5">
-                        <!-- Row 0 -->
-                        <div class="cell black"></div><div class="cell black"></div><div class="cell black"></div><div class="cell black"></div><div class="cell black"></div>
-                        <!-- Row 1 -->
-                        <div class="cell black"></div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell black"></div>
-                        <!-- Row 2 -->
-                        <div class="cell black"></div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell white"></div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell white"></div>
-                        <!-- Row 3 -->
-                        <div class="cell black"></div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell empty" style="background:#ede4d8;">·</div><div class="cell white"></div>
-                        <!-- Row 4 -->
-                        <div class="cell black"></div><div class="cell white"></div><div class="cell white"></div><div class="cell white"></div><div class="cell white"></div>
-                    </div>
-                    <p style="margin-top:6px;font-weight:600;">5×5 Example Board</p>
-                </div>
-
-                <div style="background:#f5efe8;padding:15px 25px;border-radius:12px;display:flex;flex-direction:column;justify-content:center;">
-                    <div class="territory-item">
-                        <span style="font-size:1.8em;">⚫</span> Black territory: <span class="count">6</span>
-                        <span style="display:block;font-size:0.8em;color:#6b5a4a;">(empty intersections surrounded by black)</span>
-                    </div>
-                    <div class="territory-item" style="margin-top:6px;">
-                        <span style="font-size:1.8em;">⚪</span> White territory: <span class="count">4</span>
-                        <span style="display:block;font-size:0.8em;color:#6b5a4a;">(empty intersections surrounded by white)</span>
-                    </div>
-                    <div style="margin-top:10px;font-size:1.3em;font-weight:700;color:#3d2b1f;">
-                        🏆 Black wins by 2 points!
-                    </div>
-                </div>
-            </div>
-
-            <p><strong>Note:</strong> In real games, we also count captured stones and <em>komi</em> (compensation points for white playing second), but this gives you the basic idea.</p>
-        </div>
-
-        <!-- ==================== SECTION 1.4 (all sub-sections) ==================== -->
-        <div class="section" data-section="3">
-            <span class="lesson-tag">1.4</span>
-            <h2>📏 Basic Rules</h2>
-
-            <!-- 1.4.1 -->
-            <h3>1.4.1 — Two Players, Black Moves First</h3>
-            <p>Black places a stone on any empty intersection, then White, then Black, and so on until both players pass.</p>
-
-            <!-- Interactive Board -->
-            <div class="board-wrapper">
-                <canvas id="goBoard" width="400" height="400"></canvas>
-                <div class="board-controls">
-                    <button data-size="9" class="active">9×9</button>
-                    <button data-size="13">13×13</button>
-                    <button data-size="19">19×19</button>
-                    <button id="resetBoardBtn">🔄 Reset</button>
-                </div>
-                <div class="status-msg" id="boardStatus">⚫ Black's turn — click to place a stone</div>
-            </div>
-
-            <p style="font-size:0.95em;color:#6b5a4a;">⬆️ Try placing stones! Click on intersections. Black moves first, then White alternates.</p>
-
-            <!-- 1.4.2 -->
-            <h3 style="margin-top:25px;">1.4.2 — Stones on Empty Intersections, No Moving</h3>
-            <p>Stones are placed on <strong>intersections</strong> of the grid lines (not in the squares). Once placed, a stone <strong>cannot be moved</strong> — it stays until captured (if ever).</p>
-            <p style="font-size:0.95em;color:#6b5a4a;">✅ Try it above — you can only place on empty intersections.</p>
-
-            <!-- 1.4.3 -->
-            <h3>1.4.3 — Liberties &amp; Capturing</h3>
-            <p>A <strong>liberty</strong> is an empty intersection directly adjacent (up, down, left, right) to a stone. A stone with no liberties is <strong>captured</strong> and removed.</p>
-
-            <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:12px 0;">
-                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
-                    <div style="font-size:2.2em;">📍 <span style="background:#2c2c2c;display:inline-block;width:28px;height:28px;border-radius:50%;"></span></div>
-                    <p><strong>Corner:</strong> 2 liberties</p>
-                </div>
-                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
-                    <div style="font-size:2.2em;">📍 <span style="background:#2c2c2c;display:inline-block;width:28px;height:28px;border-radius:50%;"></span> <span style="font-size:0.5em;">⬆️⬇️⬅️➡️</span></div>
-                    <p><strong>Side:</strong> 3 liberties</p>
-                </div>
-                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
-                    <div style="font-size:2.2em;">📍 <span style="background:#2c2c2c;display:inline-block;width:28px;height:28px;border-radius:50%;"></span> <span style="font-size:0.5em;">⬆️⬇️⬅️➡️</span></div>
-                    <p><strong>Middle:</strong> 4 liberties</p>
-                </div>
-            </div>
-
-            <div class="highlight-box">
-                <strong>⚡ Capture Example:</strong>
-                <p>If White places a stone on all 4 liberties of a Black stone in the middle, that Black stone is captured and removed. Try it on the board above — surround a stone completely!</p>
-            </div>
-
-            <!-- 1.4.4 -->
-            <h3>1.4.4 — Connected Stones Share Liberties</h3>
-            <p>Stones of the same color that are adjacent (up/down/left/right) are <strong>connected</strong>. They share liberties and live or die together.</p>
-
-            <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:12px 0;">
-                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
-                    <div style="font-size:2.2em;">
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                    </div>
-                    <p><strong>2 stones</strong><br><span style="font-size:0.9em;color:#6b5a4a;">6 liberties (shared)</span></p>
-                </div>
-                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
-                    <div style="font-size:2.2em;">
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                    </div>
-                    <p><strong>3 stones (L-shape)</strong><br><span style="font-size:0.9em;color:#6b5a4a;">7 liberties</span></p>
-                </div>
-                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
-                    <div style="font-size:2.2em;">
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                        <span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>
-                    </div>
-                    <p><strong>4 stones (square)</strong><br><span style="font-size:0.9em;color:#6b5a4a;">8 liberties</span></p>
-                </div>
-            </div>
-
-            <p><strong>Challenge:</strong> On the board above, try placing two connected Black stones, then use White stones to surround and capture them. Count the liberties as you go!</p>
-        </div>
-
-        <!-- ==================== SECTION 1.5 ==================== -->
-        <div class="section" data-section="4">
-            <span class="lesson-tag">1.5</span>
-            <h2>🙏 Etiquette &amp; Manners</h2>
-
-            <p>Weiqi is a game of respect and mindfulness. Here are key etiquette points:</p>
-
-            <div class="etiquette-grid">
-                <div class="etiquette-card">
-                    <span class="emoji">🙇</span>
-                    <strong>Bow before starting</strong>
-                    <p style="font-size:0.9em;color:#5a4a3a;">Show respect to your opponent and the game.</p>
-                </div>
-                <div class="etiquette-card">
-                    <span class="emoji">🤫</span>
-                    <strong>Silence &amp; concentration</strong>
-                    <p style="font-size:0.9em;color:#5a4a3a;">Avoid distractions. Think before you move.</p>
-                </div>
-                <div class="etiquette-card">
-                    <span class="emoji">✋</span>
-                    <strong>Place stones gently</strong>
-                    <p style="font-size:0.9em;color:#5a4a3a;">Clicking stones loudly is considered impolite in traditional settings.</p>
-                </div>
-                <div class="etiquette-card">
-                    <span class="emoji">⏳</span>
-                    <strong>Don't stall</strong>
-                    <p style="font-size:0.9em;color:#5a4a3a;">Play at a reasonable pace. Respect your opponent's time.</p>
-                </div>
-                <div class="etiquette-card">
-                    <span class="emoji">🤝</span>
-                    <strong>Resign with dignity</strong>
-                    <p style="font-size:0.9em;color:#5a4a3a;">If you're losing, place two stones on the board to resign, then thank your opponent.</p>
-                </div>
-                <div class="etiquette-card">
-                    <span class="emoji">📖</span>
-                    <strong>Review together</strong>
-                    <p style="font-size:0.9em;color:#5a4a3a;">After the game, it's customary to review key moves with your opponent.</p>
-                </div>
-            </div>
-
-            <div class="highlight-box" style="margin-top:10px;">
-                <strong>🧘 The Spirit of Weiqi:</strong>
-                <p>"Win without arrogance, lose without resentment." The game is a mirror of your character — patience, humility, and clarity of mind are as important as tactical skill.</p>
-            </div>
-        </div>
-
-        <!-- ==================== NAVIGATION ==================== -->
+        <!-- Navigation -->
         <div class="nav-buttons">
             <button id="prevBtn" class="btn-secondary" disabled>◀ Previous</button>
             <span style="font-size:0.95em;color:#7a6a5a;align-self:center;" id="sectionCounter">1 / 5</span>
             <button id="nextBtn">Next ▶</button>
         </div>
-
     </div>
 
     <script>
-    // ============================================================
-    //  SECTION NAVIGATION - CORRECTED
-    // ============================================================
-    const sections = document.querySelectorAll('.section');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const counter = document.getElementById('sectionCounter');
-    let current = 0;
+        // ============================================================
+        //  LOAD LESSONS FROM JSON
+        // ============================================================
+        let lessonsData = null;
+        let currentSection = 0;
+        let totalSections = 0;
 
-    function updateNav() {
-        // Hide all sections, then show the current one
-        sections.forEach((s, i) => {
-            s.classList.toggle('active', i === current);
+        fetch('data/lessons.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to load lessons.json');
+                return response.json();
+            })
+            .then(data => {
+                lessonsData = data.chapters;
+                totalSections = lessonsData.length;
+                renderAll();
+            })
+            .catch(error => {
+                console.error('Error loading lessons:', error);
+                document.getElementById('contentContainer').innerHTML = `
+                    <div style="padding:40px;text-align:center;color:#b33;">
+                        <h2>⚠️ Failed to load lessons</h2>
+                        <p>Make sure <code>data/lessons.json</code> exists and is valid JSON.</p>
+                        <p style="font-size:0.9em;color:#666;">Error: ${error.message}</p>
+                    </div>
+                `;
+            });
+
+        // ============================================================
+        //  RENDER ENGINE
+        // ============================================================
+        function renderAll() {
+            renderProgressDots();
+            renderSection(currentSection);
+            updateNavButtons();
+        }
+
+        function renderProgressDots() {
+            const container = document.getElementById('progressDots');
+            container.innerHTML = '';
+            for (let i = 0; i < totalSections; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                if (i === currentSection) dot.classList.add('active');
+                if (i < currentSection) dot.classList.add('done');
+                dot.dataset.index = i;
+                dot.addEventListener('click', () => goToSection(i));
+                container.appendChild(dot);
+            }
+        }
+
+        function renderSection(index) {
+            const container = document.getElementById('contentContainer');
+            const chapter = lessonsData[index];
+            if (!chapter) return;
+
+            let html = `
+                <div class="section active">
+                    <span class="lesson-tag">${chapter.id}</span>
+                    <h2>${chapter.icon} ${chapter.title}</h2>
+            `;
+
+            chapter.content.forEach(block => {
+                html += renderContentBlock(block);
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+
+            // Re-initialize board if this section has one
+            if (chapter.content.some(b => b.type === 'interactive-board')) {
+                setTimeout(initBoard, 100);
+            }
+        }
+
+        function renderContentBlock(block) {
+            switch (block.type) {
+                case 'paragraph':
+                    return `<p>${block.text}</p>`;
+
+                case 'subheading':
+                    return `<h3>${block.text}</h3>`;
+
+                case 'highlight':
+                    let listHtml = '';
+                    if (block.list) {
+                        listHtml = `<ul>${block.list.map(item => `<li>${item}</li>`).join('')}</ul>`;
+                    }
+                    return `
+                        <div class="highlight-box">
+                            <strong>${block.title}</strong>
+                            <p>${block.text}</p>
+                            ${listHtml}
+                            ${block.footer ? `<p style="margin-top:6px;font-style:italic;">${block.footer}</p>` : ''}
+                        </div>
+                    `;
+
+                case 'image':
+                    return `
+                        <div class="image-container">
+                            <img src="${block.src}" alt="${block.alt || ''}" loading="lazy">
+                            ${block.caption ? `<div class="caption">${block.caption}</div>` : ''}
+                        </div>
+                    `;
+
+                case 'grid':
+                    return `
+                        <div class="equipment-grid">
+                            ${block.items.map(item => `
+                                <div class="equip-card">
+                                    ${item.image ? `<img src="${item.image}" alt="${item.title}">` : `<span class="emoji-big">${item.emoji}</span>`}
+                                    <h4>${item.title}</h4>
+                                    <p>${item.details}</p>
+                                    <p style="font-size:0.85em;color:#7a6a5a;">${item.note}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                case 'territory-example':
+                    return `
+                        <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:15px 0;">
+                            <div style="background:#f5efe8;padding:15px;border-radius:12px;text-align:center;">
+                                <div class="grid-5x5">
+                                    ${generateTerritoryGrid()}
+                                </div>
+                                <p style="margin-top:6px;font-weight:600;">5×5 Example Board</p>
+                            </div>
+                            <div style="background:#f5efe8;padding:15px 25px;border-radius:12px;display:flex;flex-direction:column;justify-content:center;">
+                                <div class="territory-item">
+                                    <span style="font-size:1.8em;">⚫</span> Black territory: <span class="count">${block.blackTerritory}</span>
+                                </div>
+                                <div class="territory-item" style="margin-top:6px;">
+                                    <span style="font-size:1.8em;">⚪</span> White territory: <span class="count">${block.whiteTerritory}</span>
+                                </div>
+                                <div style="margin-top:10px;font-size:1.3em;font-weight:700;color:#3d2b1f;">
+                                    🏆 ${block.winner} wins!
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'interactive-board':
+                    return `
+                        <div class="board-wrapper">
+                            <canvas id="goBoard" width="400" height="400"></canvas>
+                            <div class="board-controls">
+                                <button data-size="9" class="active">9×9</button>
+                                <button data-size="13">13×13</button>
+                                <button data-size="19">19×19</button>
+                                <button id="resetBoardBtn">🔄 Reset</button>
+                            </div>
+                            <div class="status-msg" id="boardStatus">⚫ Black's turn — click to place a stone</div>
+                        </div>
+                        ${block.label ? `<p style="font-size:0.95em;color:#6b5a4a;">⬆️ ${block.label}</p>` : ''}
+                    `;
+
+                case 'liberty-example':
+                    return `
+                        <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:12px 0;">
+                            ${['Corner: 2 liberties', 'Side: 3 liberties', 'Middle: 4 liberties'].map(text => `
+                                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
+                                    <div style="font-size:2.2em;">📍 <span style="background:#2c2c2c;display:inline-block;width:28px;height:28px;border-radius:50%;"></span></div>
+                                    <p><strong>${text}</strong></p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                case 'connected-example':
+                    return `
+                        <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin:12px 0;">
+                            ${[
+                                { stones: 2, label: '2 stones', liberties: '6 liberties (shared)' },
+                                { stones: 3, label: '3 stones (L-shape)', liberties: '7 liberties' },
+                                { stones: 4, label: '4 stones (square)', liberties: '8 liberties' }
+                            ].map(item => `
+                                <div style="background:#f5efe8;padding:12px 18px;border-radius:10px;text-align:center;">
+                                    <div style="font-size:2.2em;">
+                                        ${Array(item.stones).fill('<span style="background:#2c2c2c;display:inline-block;width:24px;height:24px;border-radius:50%;"></span>').join('')}
+                                    </div>
+                                    <p><strong>${item.label}</strong><br><span style="font-size:0.9em;color:#6b5a4a;">${item.liberties}</span></p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                case 'etiquette-grid':
+                    return `
+                        <div class="etiquette-grid">
+                            ${block.items.map(item => `
+                                <div class="etiquette-card">
+                                    <span class="emoji">${item.emoji}</span>
+                                    <strong>${item.title}</strong>
+                                    <p style="font-size:0.9em;color:#5a4a3a;">${item.description}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                default:
+                    return `<p>Unknown content type: ${block.type}</p>`;
+            }
+        }
+
+        // ============================================================
+        //  HELPER: Territory Grid
+        // ============================================================
+        function generateTerritoryGrid() {
+            const rows = [
+                ['black', 'black', 'black', 'black', 'black'],
+                ['black', 'empty', 'empty', 'empty', 'black'],
+                ['black', 'empty', 'white', 'empty', 'white'],
+                ['black', 'empty', 'empty', 'empty', 'white'],
+                ['black', 'white', 'white', 'white', 'white']
+            ];
+            return rows.map(row =>
+                row.map(cell => `<div class="cell ${cell}">${cell === 'empty' ? '·' : ''}</div>`).join('')
+            ).join('');
+        }
+
+        // ============================================================
+        //  NAVIGATION
+        // ============================================================
+        function goToSection(index) {
+            if (index < 0 || index >= totalSections) return;
+            currentSection = index;
+            renderAll();
+        }
+
+        function updateNavButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const counter = document.getElementById('sectionCounter');
+
+            prevBtn.disabled = currentSection === 0;
+            nextBtn.textContent = currentSection === totalSections - 1 ? '✅ Finish' : 'Next ▶';
+            counter.textContent = `${currentSection + 1} / ${totalSections}`;
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentSection > 0) goToSection(currentSection - 1);
         });
 
-        // Update progress dots
-        dots.forEach((d, i) => {
-            d.classList.toggle('active', i === current);
-            d.classList.toggle('done', i < current);
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentSection < totalSections - 1) {
+                goToSection(currentSection + 1);
+            } else {
+                alert('🎉 You have completed Chapter 1! Well done!');
+            }
         });
 
-        // Update button states and counter
-        prevBtn.disabled = current === 0;
-        nextBtn.textContent = current === sections.length - 1 ? '✅ Finish' : 'Next ▶';
-        counter.textContent = `${current+1} / ${sections.length}`;
+        // ============================================================
+        //  GO BOARD - COMPLETE IMPLEMENTATION
+        // ============================================================
+        function initBoard() {
+            const canvas = document.getElementById('goBoard');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const status = document.getElementById('boardStatus');
+            if (!status) return;
 
-        // Re-draw the Go board if we're on that section
-        if (current === 3) {
-            // Make sure the board is initialized
-            if (typeof drawBoard === 'function') {
+            let gridSize = 9;
+            const padding = 25;
+            let board = [];
+            let currentPlayer = 'black';
+            let gameOver = false;
+
+            function createBoard(size) {
+                gridSize = size;
+                board = Array(size).fill().map(() => Array(size).fill(null));
+                currentPlayer = 'black';
+                gameOver = false;
+                status.textContent = '⚫ Black\'s turn — click to place a stone';
                 drawBoard();
             }
-        }
-    }
 
-    // Event listeners for navigation buttons
-    prevBtn.addEventListener('click', () => {
-        if (current > 0) {
-            current--;
-            updateNav();
-        }
-    });
-
-    nextBtn.addEventListener('click', () => {
-        if (current < sections.length - 1) {
-            current++;
-            updateNav();
-        } else {
-            alert('🎉 You have completed Chapter 1! Well done!');
-        }
-    });
-
-    // Click on progress dots to jump to a section
-    dots.forEach((d, i) => {
-        d.addEventListener('click', () => {
-            current = i;
-            updateNav();
-        });
-    });
-
-    // ============================================================
-    //  GO BOARD - SIMPLIFIED & RELIABLE (Add this if missing)
-    // ============================================================
-    // This is a basic version to ensure the board works.
-    // If you have a more complex version, you can replace this part.
-
-    const canvas = document.getElementById('goBoard');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        const status = document.getElementById('boardStatus');
-
-        let boardSize = 9;
-        let gridSize = 9;
-        const padding = 25;
-        let board = [];
-        let currentPlayer = 'black';
-        let gameOver = false;
-
-        function initBoard(size) {
-            gridSize = size;
-            board = Array(size).fill().map(() => Array(size).fill(null));
-            currentPlayer = 'black';
-            gameOver = false;
-            if (status) status.textContent = '⚫ Black\'s turn — click to place a stone';
-            drawBoard();
-        }
-
-        function getCanvasSize() {
-            return gridSize * 38 + padding * 2;
-        }
-
-        function resizeCanvas() {
-            const size = getCanvasSize();
-            canvas.width = size;
-            canvas.height = size;
-            canvas.style.width = Math.min(size, 420) + 'px';
-            canvas.style.height = Math.min(size, 420) + 'px';
-        }
-
-        function drawBoard() {
-            resizeCanvas();
-            const size = canvas.width;
-            const pad = padding;
-            const cSize = (size - pad * 2) / gridSize;
-
-            // Wood background
-            ctx.fillStyle = '#deb887';
-            ctx.fillRect(0, 0, size, size);
-
-            // Grid lines
-            ctx.strokeStyle = '#3d2b1f';
-            ctx.lineWidth = 1;
-            for (let i = 0; i < gridSize; i++) {
-                ctx.beginPath();
-                ctx.moveTo(pad, pad + i * cSize);
-                ctx.lineTo(size - pad, pad + i * cSize);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(pad + i * cSize, pad);
-                ctx.lineTo(pad + i * cSize, size - pad);
-                ctx.stroke();
+            function getCanvasSize() {
+                return gridSize * 38 + padding * 2;
             }
 
-            // Draw stones
-            for (let row = 0; row < gridSize; row++) {
-                for (let col = 0; col < gridSize; col++) {
-                    const stone = board[row][col];
-                    if (!stone) continue;
-                    const x = pad + col * cSize;
-                    const y = pad + row * cSize;
-                    const radius = cSize * 0.42;
+            function resizeCanvas() {
+                const size = getCanvasSize();
+                canvas.width = size;
+                canvas.height = size;
+                canvas.style.width = Math.min(size, 420) + 'px';
+                canvas.style.height = Math.min(size, 420) + 'px';
+            }
 
-                    const gradient = ctx.createRadialGradient(
-                        x - radius * 0.3, y - radius * 0.3, radius * 0.1,
-                        x, y, radius
-                    );
-                    if (stone === 'black') {
-                        gradient.addColorStop(0, '#555');
-                        gradient.addColorStop(1, '#111');
-                    } else {
-                        gradient.addColorStop(0, '#fff');
-                        gradient.addColorStop(1, '#ccc');
-                    }
+            function drawBoard() {
+                resizeCanvas();
+                const size = canvas.width;
+                const pad = padding;
+                const cSize = (size - pad * 2) / gridSize;
+
+                // Wood background
+                ctx.fillStyle = '#deb887';
+                ctx.fillRect(0, 0, size, size);
+
+                // Grid lines
+                ctx.strokeStyle = '#3d2b1f';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < gridSize; i++) {
                     ctx.beginPath();
-                    ctx.arc(x, y, radius, 0, Math.PI * 2);
-                    ctx.fillStyle = gradient;
-                    ctx.fill();
-                    ctx.shadowColor = 'rgba(0,0,0,0.3)';
-                    ctx.shadowBlur = 6;
-                    ctx.fill();
-                    ctx.shadowBlur = 0;
+                    ctx.moveTo(pad, pad + i * cSize);
+                    ctx.lineTo(size - pad, pad + i * cSize);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(pad + i * cSize, pad);
+                    ctx.lineTo(pad + i * cSize, size - pad);
+                    ctx.stroke();
+                }
+
+                // Draw stones
+                for (let row = 0; row < gridSize; row++) {
+                    for (let col = 0; col < gridSize; col++) {
+                        const stone = board[row][col];
+                        if (!stone) continue;
+                        const x = pad + col * cSize;
+                        const y = pad + row * cSize;
+                        const radius = cSize * 0.42;
+
+                        const gradient = ctx.createRadialGradient(
+                            x - radius * 0.3, y - radius * 0.3, radius * 0.1,
+                            x, y, radius
+                        );
+                        if (stone === 'black') {
+                            gradient.addColorStop(0, '#555');
+                            gradient.addColorStop(1, '#111');
+                        } else {
+                            gradient.addColorStop(0, '#fff');
+                            gradient.addColorStop(1, '#ccc');
+                        }
+                        ctx.beginPath();
+                        ctx.arc(x, y, radius, 0, Math.PI * 2);
+                        ctx.fillStyle = gradient;
+                        ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                        ctx.shadowBlur = 6;
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                    }
                 }
             }
-        }
 
-        // Handle clicks on the board
-        canvas.addEventListener('click', (e) => {
-            if (gameOver) return;
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
+            // Handle clicks on the board
+            canvas.addEventListener('click', (e) => {
+                if (gameOver) return;
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
 
-            const mouseX = (e.clientX - rect.left) * scaleX;
-            const mouseY = (e.clientY - rect.top) * scaleY;
-            const pad = padding;
-            const cSize = (canvas.width - pad * 2) / gridSize;
+                const mouseX = (e.clientX - rect.left) * scaleX;
+                const mouseY = (e.clientY - rect.top) * scaleY;
+                const pad = padding;
+                const cSize = (canvas.width - pad * 2) / gridSize;
 
-            let col = Math.round((mouseX - pad) / cSize);
-            let row = Math.round((mouseY - pad) / cSize);
+                let col = Math.round((mouseX - pad) / cSize);
+                let row = Math.round((mouseY - pad) / cSize);
 
-            if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) return;
-            if (board[row][col] !== null) return;
+                if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) return;
+                if (board[row][col] !== null) return;
 
-            board[row][col] = currentPlayer;
-            const next = currentPlayer === 'black' ? 'white' : 'black';
-            currentPlayer = next;
-            if (status) {
+                board[row][col] = currentPlayer;
+                currentPlayer = currentPlayer === 'black' ? 'white' : 'black';
                 status.textContent = currentPlayer === 'black' ? '⚫ Black\'s turn' : '⚪ White\'s turn';
+                drawBoard();
+            });
+
+            // Board size buttons
+            document.querySelectorAll('.board-controls button[data-size]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.board-controls button[data-size]').forEach(b => b.classList.remove(
+                    'active'));
+                    btn.classList.add('active');
+                    const size = parseInt(btn.dataset.size);
+                    createBoard(size);
+                });
+            });
+
+            // Reset button
+            const resetBtn = document.getElementById('resetBoardBtn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    const activeSizeBtn = document.querySelector('.board-controls button[data-size].active');
+                    const size = activeSizeBtn ? parseInt(activeSizeBtn.dataset.size) : 9;
+                    createBoard(size);
+                });
             }
-            drawBoard();
-        });
 
-        // Board size buttons
-        document.querySelectorAll('.board-controls button[data-size]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.board-controls button[data-size]').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const size = parseInt(btn.dataset.size);
-                initBoard(size);
-            });
-        });
-
-        // Reset button
-        const resetBtn = document.getElementById('resetBoardBtn');
-        if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                const activeSizeBtn = document.querySelector('.board-controls button[data-size].active');
-                const size = activeSizeBtn ? parseInt(activeSizeBtn.dataset.size) : 9;
-                initBoard(size);
-            });
+            // Initialize
+            createBoard(9);
         }
+    </script>
 
-        // Initialize the board
-        initBoard(9);
-    }
-
-    // Initialize navigation on page load
-    updateNav();
-</script>
+</body>
+</html>
