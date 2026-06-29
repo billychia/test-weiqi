@@ -1,0 +1,254 @@
+{
+  "chapters": [
+    {
+      "id": "1.1",
+      "title": "History of Weiqi (围棋)",
+      "icon": "📜",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Weiqi (called \"Go\" in the West) originated in China over <strong>4,000 years ago</strong>, making it one of the oldest board games still played today. Legend credits the mythical Emperor Yao (尧) with creating the game to educate his son."
+        },
+        {
+          "type": "paragraph",
+          "text": "<strong>In Ancient China:</strong> Weiqi was a pastime of scholars, nobles, and military strategists. It was considered an essential skill for the educated elite. The game was played on a 17x17 board until the 19x19 standard emerged during the Tang Dynasty (618–907 AD)."
+        },
+        {
+          "type": "highlight",
+          "title": "🏯 The Four Arts of China (四艺)",
+          "text": "Weiqi was one of the <strong>Four Arts</strong> that every gentleman scholar was expected to master:",
+          "list": [
+            "<strong>琴 (Qín)</strong> — Music (guqin playing)",
+            "<strong>棋 (Qí)</strong> — Board game (Weiqi)",
+            "<strong>书 (Shū)</strong> — Calligraphy",
+            "<strong>画 (Huà)</strong> — Painting"
+          ],
+          "footer": "These arts represented the ideal of a well-rounded, cultured individual."
+        },
+        {
+          "type": "paragraph",
+          "text": "<strong>Spread to Japan &amp; Korea:</strong> Weiqi reached Japan in the 7th century, where it became known as <strong>Go</strong> (碁). It flourished under the patronage of shoguns and samurai. The Japanese established professional houses and refined the game's theory. In Korea, it is called <strong>Baduk</strong> (바둑) and became deeply embedded in Korean culture, with many top modern players hailing from Korea."
+        },
+        {
+          "type": "paragraph",
+          "text": "<strong>South East Asia:</strong> Weiqi spread through trade routes, with smaller but dedicated communities in Vietnam, Thailand, Singapore, and Malaysia. It remains a niche but growing activity."
+        },
+        {
+          "type": "paragraph",
+          "text": "<strong>The West &amp; Africa:</strong> Go arrived in Europe in the 19th century via Japanese diplomats. Today, Europe has a strong Go scene with national federations, tournaments, and even professional players. In the USA, the American Go Association (AGA) promotes the game. Africa has small but passionate communities, particularly in South Africa and Nigeria, with growth supported by online platforms."
+        },
+        {
+          "type": "paragraph",
+          "text": "<strong>Modern Era:</strong> The 21st century has seen a revolution — AI systems like <strong>AlphaGo</strong> (2016) defeated top human players, sparking global interest and changing how the game is studied and played."
+        },
+        {
+          "type": "image",
+          "src": "images/history/ancient-go.jpg",
+          "alt": "Ancient Chinese Go players",
+          "caption": "Traditional Weiqi game in ancient China"
+        }
+      ]
+    },
+    {
+      "id": "1.2",
+      "title": "Equipment Needed",
+      "icon": "🎒",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "To play Weiqi, you need only a few items:"
+        },
+        {
+          "type": "grid",
+          "items": [
+            {
+              "title": "Board",
+              "emoji": "⬛",
+              "details": "<strong>9×9</strong> — Beginner<br><strong>13×13</strong> — Intermediate<br><strong>19×19</strong> — Standard (traditional)",
+              "note": "The board has a grid of lines; stones are placed on <em>intersections</em>.",
+              "image": "images/equipment/board.jpg"
+            },
+            {
+              "title": "Stones",
+              "emoji": "⚫⚪",
+              "details": "<strong>181 Black</strong> · <strong>180 White</strong>",
+              "note": "Made from slate (black) and clamshell (white) traditionally, or plastic/glass for beginners.",
+              "image": "images/equipment/stones.jpg"
+            },
+            {
+              "title": "Bowls",
+              "emoji": "🥣",
+              "details": "Wooden or plastic bowls to hold the stones during play.",
+              "note": "Often made from bamboo, cherry, or other woods.",
+              "image": "images/equipment/bowls.jpg"
+            }
+          ]
+        },
+        {
+          "type": "highlight",
+          "title": "💻 Playing in the Digital World",
+          "text": "Today, most beginners learn and play online. Popular platforms include:",
+          "list": [
+            "<strong>OGS (Online Go Server)</strong> — Web-based, beginner-friendly",
+            "<strong>Pandanet</strong> — One of the oldest Go servers",
+            "<strong>Fox Weiqi / Tygem</strong> — Huge Asian servers",
+            "<strong>AI Bots:</strong> KataGo, Leela Zero, and even built-in bots on apps like <strong>BadukPop</strong>"
+          ],
+          "footer": "You can play against humans or AI from your phone, tablet, or computer — no physical equipment needed!"
+        },
+        {
+          "type": "paragraph",
+          "text": "👇 <em>In the interactive board below, you can switch board sizes to see the difference.</em>"
+        }
+      ]
+    },
+    {
+      "id": "1.3",
+      "title": "Objective: Enclose More Territory",
+      "icon": "🎯",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "<strong>The goal of Weiqi</strong> is to <strong>control more territory</strong> than your opponent. Territory is the empty intersections surrounded by your stones."
+        },
+        {
+          "type": "highlight",
+          "title": "♟️ Contrast with Chess",
+          "text": "In <strong>Chinese Chess (象棋)</strong> and <strong>International Chess</strong>, the objective is to <em>capture the King</em> (or General) — a destructive goal. In Weiqi, the goal is <strong>constructive</strong>: you build and surround territory, not eliminate the opponent's leader.",
+          "footer": "\"Weiqi is a game of balance and influence, not annihilation.\""
+        },
+        {
+          "type": "subheading",
+          "text": "Example: 5×5 Endgame"
+        },
+        {
+          "type": "paragraph",
+          "text": "Let's look at a finished game on a tiny 5×5 board. Black stones are ⚫, White are ⚪. Empty intersections are territory."
+        },
+        {
+          "type": "territory-example",
+          "blackTerritory": 6,
+          "whiteTerritory": 4,
+          "winner": "Black"
+        },
+        {
+          "type": "paragraph",
+          "text": "<strong>Note:</strong> In real games, we also count captured stones and <em>komi</em> (compensation points for white playing second), but this gives you the basic idea."
+        }
+      ]
+    },
+    {
+      "id": "1.4",
+      "title": "Basic Rules",
+      "icon": "📏",
+      "content": [
+        {
+          "type": "subheading",
+          "text": "1.4.1 — Two Players, Black Moves First"
+        },
+        {
+          "type": "paragraph",
+          "text": "Black places a stone on any empty intersection, then White, then Black, and so on until both players pass."
+        },
+        {
+          "type": "interactive-board",
+          "label": "Try placing stones! Click on intersections."
+        },
+        {
+          "type": "subheading",
+          "text": "1.4.2 — Stones on Empty Intersections, No Moving"
+        },
+        {
+          "type": "paragraph",
+          "text": "Stones are placed on <strong>intersections</strong> of the grid lines (not in the squares). Once placed, a stone <strong>cannot be moved</strong> — it stays until captured (if ever)."
+        },
+        {
+          "type": "paragraph",
+          "text": "✅ Try it above — you can only place on empty intersections."
+        },
+        {
+          "type": "subheading",
+          "text": "1.4.3 — Liberties & Capturing"
+        },
+        {
+          "type": "paragraph",
+          "text": "A <strong>liberty</strong> is an empty intersection directly adjacent (up, down, left, right) to a stone. A stone with no liberties is <strong>captured</strong> and removed."
+        },
+        {
+          "type": "liberty-example"
+        },
+        {
+          "type": "highlight",
+          "title": "⚡ Capture Example",
+          "text": "If White places a stone on all 4 liberties of a Black stone in the middle, that Black stone is captured and removed. Try it on the board above — surround a stone completely!"
+        },
+        {
+          "type": "subheading",
+          "text": "1.4.4 — Connected Stones Share Liberties"
+        },
+        {
+          "type": "paragraph",
+          "text": "Stones of the same color that are adjacent (up/down/left/right) are <strong>connected</strong>. They share liberties and live or die together."
+        },
+        {
+          "type": "connected-example"
+        },
+        {
+          "type": "paragraph",
+          "text": "<strong>Challenge:</strong> On the board above, try placing two connected Black stones, then use White stones to surround and capture them. Count the liberties as you go!"
+        }
+      ]
+    },
+    {
+      "id": "1.5",
+      "title": "Etiquette & Manners",
+      "icon": "🙏",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Weiqi is a game of respect and mindfulness. Here are key etiquette points:"
+        },
+        {
+          "type": "etiquette-grid",
+          "items": [
+            {
+              "emoji": "🙇",
+              "title": "Bow before starting",
+              "description": "Show respect to your opponent and the game."
+            },
+            {
+              "emoji": "🤫",
+              "title": "Silence & concentration",
+              "description": "Avoid distractions. Think before you move."
+            },
+            {
+              "emoji": "✋",
+              "title": "Place stones gently",
+              "description": "Clicking stones loudly is considered impolite in traditional settings."
+            },
+            {
+              "emoji": "⏳",
+              "title": "Don't stall",
+              "description": "Play at a reasonable pace. Respect your opponent's time."
+            },
+            {
+              "emoji": "🤝",
+              "title": "Resign with dignity",
+              "description": "If you're losing, place two stones on the board to resign, then thank your opponent."
+            },
+            {
+              "emoji": "📖",
+              "title": "Review together",
+              "description": "After the game, it's customary to review key moves with your opponent."
+            }
+          ]
+        },
+        {
+          "type": "highlight",
+          "title": "🧘 The Spirit of Weiqi",
+          "text": "\"Win without arrogance, lose without resentment.\" The game is a mirror of your character — patience, humility, and clarity of mind are as important as tactical skill."
+        }
+      ]
+    }
+  ]
+}
